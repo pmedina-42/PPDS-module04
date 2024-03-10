@@ -3,6 +3,12 @@ import random
 import string
 
 
+def generate_id() -> str:
+    """generate a random id"""
+    random_chars = ''.join(random.choices(string.ascii_lowercase, k=8))
+    return random_chars
+
+
 @dataclass
 class Student:
     name: str
@@ -14,10 +20,4 @@ class Student:
     def __post_init__(self):
         """post init"""
         self.login = self.name[0].lower() + self.surname[:7].lower()
-        self.id = self.generate_id()
-
-    @staticmethod
-    def generate_id() -> str:
-        """generate a random id"""
-        random_chars = ''.join(random.choices(string.ascii_lowercase, k=8))
-        return random_chars
+        self.id = generate_id()
